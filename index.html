@@ -1,25 +1,167 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
+  	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no"  />    
+    <title></title>
+    <style>
+      .baseinfo{
+        color: white;
+        font-weight: bold;
+        /*width: 50%;*/
+      }
+      .timeline{
+        color: white;
+        font-weight: bold;
+        /*width: 10%;*/
+      }
+      .career{
+        /*width: 40%;*/
+      }
+      @-webkit-keyframes showbar /* Safari 和 Chrome */
+      {
+      0%   {height:0px;}
+      100% {height:600px;}
+      }
+      @-webkit-keyframes showball /* Safari 和 Chrome */
+      {
+      0%   {opacity:0;}
+      100% {opacity:1;}
+      } 
+      body {
+        background:rgb(54, 50, 58);
+      }
+      .bar {
+        position: absolute;
+        left: 450px;
+        top: 100px;
+        height:600px;
+      }
+      .ball {
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        background:white;
+        border-radius: 5px;
+        z-index: 10;
+        opacity:0;
+        -webkit-animation: showball 0.5s linear;
+        -webkit-animation-fill-mode: forwards;
+      }
+      .years {
+        position: relative;
+        left: -40px;
+        top: -20px;
+      }
+      .pao {
+        top: -75px;
+        left: 20px;
+        width: 500px;
+      }
+      .info {
+        top: 100px;
+      }
+      .triangle-right.left {
+        margin-left:40px;
+        background:#075698;
+      }
+      .triangle-right {
+        position:relative;
+        padding:15px;
+        margin:1em 0 3em;
+        color:#fff; /* default background for browsers without gradient support */
+        /* css3 */
+        border-radius:10px;
+        margin-left: 40px;  background: #075698;
+      }
+      .triangle-right.left:after {
+        top:16px; 
+        left:-40px; /* value = - border-left-width - border-right-width */
+        bottom:auto;
+        border-width:15px 40px 0 0; /* vary these values to change the angle of the vertex */
+        border-color:transparent #075698; 
+      }
+      .triangle-right:after {
+        content:"";
+        position:absolute;
+        bottom:-20px; /* value = - border-top-width - border-bottom-width */
+        left:50px; /* controls horizontal position */
+        border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
+        border-style:solid;
+        border-color:#075698 transparent; 
+          /* reduce the damage in FF3.0 */
+          display:block; 
+          width:0;
+        behavior: url(ie-css3.htc);
+      }    
+    </style>
   </head>
-
   <body>
+    <div class='baseinfo'></div>
+    <div class='timeline'></div>
+    <div class='career'></div>
+    <script>
+      var iPhone = (navigator.userAgent.indexOf("iPhone") != -1);
+      var Android = (navigator.userAgent.indexOf("Android") != -1); 
+      if(iPhone||Android){
+        //show cellphone verson
+        console.log('show cellphone verson');
 
-    <header>
-      <div class="container">
-      </div>
-    </header>
+      }else{
+        //show print verson
+        console.log('show print verson');
 
-    <div class="container">
-    </div>
+        var binfo = 
+        "<img>" +
+        "<ul>" +
+          "<li>姓&nbsp;&nbsp;&nbsp;&nbsp;名  曲智</li>" +
+          "<li>性&nbsp;&nbsp;&nbsp;&nbsp;别  男</li>" +
+          "<li>民&nbsp;&nbsp;&nbsp;&nbsp;族  汉族 </li>" +
+          "<li>出生年月  1987.05.25</li>" +
+          "<li>学&nbsp;&nbsp;&nbsp;&nbsp;历  本科 </li>" +
+          "<li>院&nbsp;&nbsp;&nbsp;&nbsp;校  辽宁省辽宁工程技术大学</li>" +
+          "<li>专&nbsp;&nbsp;&nbsp;&nbsp;业  信息工程（通信工程）</li>" +
+          "<li>联系电话  15640880557</li>" +
+          "<li>E-mail   504784339@qq.com</li>" +
+        "</ul>" +
+        "";
+        var element=document.getElementsByClassName("baseinfo")[0];
+        element.innerHTML = binfo;
 
-    
+        var years = 6;
+        var y = [1987,2010,2012,2013,2014,2015];
+        var dsc = ['',
+        '加入 东软集团股份有限公司 任 初级软件工程师</br>参与日本某品牌BD/DVD Player开发',
+        '参与日本某品牌DTV开发</br>qqqqq',
+        '参与日本某品牌DTV开发</br>评为骨干员工</br>职位变更为 软件工程师',
+        '参与日本某品牌DTV开发</br>评为骨干员工</br>qqqqq',
+        '参与日本某品牌DTV开发</br>参与国内某品牌智能小区APP开发</br>qqqqq'];
+        var durTime = 2;
+        var pageH = 600;
+        var balls = '';
+        for (var i = 1; i < years; i++) {
+          balls += "<div class='ball' style='top:"+pageH/years*i+"px;-webkit-animation-delay:"+durTime/years*i+"s;'><p class='years'>"+y[i]+"</p><p class='pao triangle-right left'>"+dsc[i]+"</p></div>";
+        };
+        var para = 
+        "<div class='bar'>" +
+          //bar
+          "<div style='position:absolute;width:10px;background:white;-webkit-animation: showbar "+durTime+"s linear;-webkit-animation-fill-mode: forwards;'></div>" +
+          //line
+          "<div style='position:absolute;width:4px;height:"+pageH+"px;border-right: 3px;border-left: 3px;border-bottom: 0;border-top: 0;border-style: solid;border-color: rgb(54, 50, 58);'></div>" +
+          //ball
+          "<div style='position: absolute;height: 10px;width: 10px;background:white;border-radius: 5px;z-index: 10;'><p class='years'>1987</p></div>" +      
+          //ball
+           balls+
+          //arrow
+          "<div style='position: absolute;height: 10px;top:"+pageH+"px;z-index:10;-webkit-animation: showball 0.5s linear "+durTime+"s;-webkit-animation-fill-mode: forwards;opacity:0;border-width:5px; border-color:white transparent transparent transparent;border-style:solid dashed dashed dashed; border-bottom:none;'></div>" + 
+        "</div>" +
+        "";
+        var element=document.getElementsByClassName("timeline")[0];
+        element.innerHTML = para;      
+      }
+    </script>
   </body>
 </html>
